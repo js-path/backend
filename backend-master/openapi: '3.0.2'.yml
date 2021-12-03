@@ -1,0 +1,91 @@
+openapi: '3.0.2'
+info:
+  title: 'Registration && Login'
+  version: '1.0'
+servers:
+  - url: 'http://localhost:5000'
+paths:
+  /:
+    get:
+      responses:
+        '200':
+          description: 'Home Page'
+
+  /register:
+    get:
+      responses:
+        '200':
+          description: 'Registration Page'
+    post:
+      parameters:
+        - name: 'name'
+          in: query
+          description: 'Name || Must Not Be Empty'
+          required: true
+          schema:
+            type: 'string'
+
+        - name: 'lastName'
+          in: query
+          description: 'last Name || Must Not Be Empty'
+          required: true
+          schema:
+            type: 'string'
+
+        - name: 'phoneNumber'
+          in: query
+          description: 'Phone Number  || Must Not Be Empty || Should Only Contain Numbers'
+          required: true
+          schema:
+            type: 'integer'
+    
+        - name: 'email'
+          in: query
+          description: 'Email Address || Must Not Be Empty'
+          required: true
+          schema:
+            type: 'string'
+    
+        - name: 'username'
+          in: query
+          description: 'Username  || Must Not Be Empty'
+          required: true
+          schema:
+            type: 'string'
+
+        - name: 'password'
+          in: query
+          description: 'Password || Password Must Be Longer Than 10 Characters'
+          required: true
+          schema:
+            type: 'string'
+    
+      responses:
+        '200':
+          description: 'Successful Registration'
+
+  /login:
+    get:
+      responses:
+        '200':
+          description: 'Login Page'
+    post:
+      parameters:
+        - name: 'username'
+          in: query
+          description: 'Username'
+          required: true
+          schema:
+            type: 'string'
+
+        - name: 'password'
+          in: query
+          description: 'Password'
+          required: true
+          schema:
+            type: 'string'
+    
+      responses:
+        '200':
+          description: 'Successful Login'
+
