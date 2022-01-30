@@ -15,24 +15,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const Router_1 = require("./Router");
-const path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const cors_1 = __importDefault(require("cors"));
+const index_1 = require("./router/index");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.use((0, cookie_parser_1.default)());
+app.use((0, cors_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use("/", express_1.default.static(path_1.default.join(__dirname, "/../src/public/home_page")));
-app.use("/login", express_1.default.static(path_1.default.join(__dirname, "/../src/public/login")));
-app.use("/register", express_1.default.static(path_1.default.join(__dirname, "/../src/public/register")));
-app.get("/test", (req, res) => {
-    res.send(JSON.stringify(path_1.default.join(__dirname, "/../src/public/homepage")));
-});
-app.use("/", Router_1.router);
+app.use("/api", index_1.router);
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        app.listen(process.env.PORT, () => {
+        const PORT = process.env.PORT || 5000;
+        app.listen(PORT, () => {
             // tslint:disable-next-line:no-console
-            console.log(`[+] server started on port ${process.env.PORT}`);
+            console.log(`[+] server started on port ${PORT}`);
         });
         yield mongoose_1.default.connect(process.env.MONGO_DB_CONNNECT_STRING, () => {
             // tslint:disable-next-line:no-console
