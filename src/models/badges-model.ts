@@ -6,11 +6,12 @@ interface Badges{
     shortcut:string;
 }
 
-const BadgesSchema = new Schema<Badges>({
+const BadgeSchema = new Schema<Badges>({
     badgeName:{type:String},
     icon:{type:String},
     shortcut:{type:String, unique:true}
 })
 
-const badgesModel = model('Badges', BadgesSchema);
-export {badgesModel};
+const badgeModel = model('Badge', BadgeSchema);
+
+export {badgeModel};
