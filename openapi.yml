@@ -62,7 +62,7 @@ paths:
     
       responses:
         '200':
-          description: 'Account activation link sended in user email'
+          description: 'Account activation link sent in user email'
 
   /login:
     get:
@@ -89,7 +89,37 @@ paths:
         '200':
           description: 'Successful Login'
 
+  /badge:
+    get:
+      responses:
+        '200':
+          description: 'Create a badge'
+    post:
+      parameters:
+        - name: 'badgeName'
+          in: query
+          description: 'Badge Name || Must Not Be Empty'
+          required: true
+          schema:
+            type: 'string'
 
+        - name: 'icon'
+          in: query
+          description: 'url to icon|| Must Not Be Empty'
+          required: true
+          schema:
+            type: 'string'
+            
+        - name: 'icon'
+          in: query
+          description: 'url to icon|| Must Not Be Empty'
+          required: true
+          schema:
+            type: 'string'
+      responses:
+              '200':
+                description: 'badge created!'
+        
   /activate:
     get:
       responses:
