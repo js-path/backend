@@ -1,6 +1,8 @@
 import express from "express"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
+import cors from "cors"
+
 import {router} from "./routs/Router"
 import path  from "path"
 import {Request, Response} from "express"
@@ -10,6 +12,7 @@ dotenv.config()
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 app.use(express.urlencoded({extended:true}))
 
 app.use("/", express.static(path.join(__dirname, "/../src/public/home_page")));

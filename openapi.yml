@@ -3,7 +3,7 @@ info:
   title: 'Registration && Login'
   version: '1.0'
 servers:
-  - url: 'http://localhost:5000'
+  - url: 'http://localhost:8001'
 paths:
   /:
     get:
@@ -90,35 +90,29 @@ paths:
           description: 'Successful Login'
 
   /badge:
-    get:
+    post:
+      description: 'lets a user create a badge'
+      requestBody: 
+        required: true
+        content : 
+          application/json:
+           schema:
+            type: object
+            required:
+            - badgeName 
+            - icon
+            - shortcut
+            properties:
+              badgeName:
+                  type: string
+              icon:
+                  type: string
+              shortcut:
+                  type: string
+
       responses:
         '200':
-          description: 'Create a badge'
-    post:
-      parameters:
-        - name: 'badgeName'
-          in: query
-          description: 'Badge Name || Must Not Be Empty'
-          required: true
-          schema:
-            type: 'string'
-
-        - name: 'icon'
-          in: query
-          description: 'url to icon|| Must Not Be Empty'
-          required: true
-          schema:
-            type: 'string'
-            
-        - name: 'icon'
-          in: query
-          description: 'url to icon|| Must Not Be Empty'
-          required: true
-          schema:
-            type: 'string'
-      responses:
-              '200':
-                description: 'badge created!'
+          description: 'Successfully created a new Badge'
         
   /activate:
     get:
@@ -129,3 +123,4 @@ paths:
       responses:
         '200':
           description: 'Successful registration'
+
