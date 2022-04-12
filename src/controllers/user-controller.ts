@@ -1,6 +1,5 @@
 import {validationResult} from "express-validator"
 import {Request, Response, NextFunction} from "express"
-import {userModel as User} from "../models/user-model"
 import {userService} from "../service/user-service"
 
 
@@ -14,7 +13,6 @@ class UserController {
             const serverResponse = await userService.registration(req, res, next)
             return serverResponse
         } catch(e){
-            // tslint:disable-next-line:no-console
             console.log(e)
             res.status(400).json({message: 'Գրանցման ընթացքում սխալ է տեղի ունեցել։'})
             next()
@@ -30,7 +28,6 @@ class UserController {
             const serverResponse = await userService.login(req, res, next);
             return serverResponse
         } catch(e){
-            // tslint:disable-next-line:no-console
             console.log(e)
             res.status(400).json({message: 'Լօգինի ընթացքում սխալ է տեղի ունեցել'})
             next()
@@ -42,7 +39,6 @@ class UserController {
             const serverResponse = await userService.activate(req, res, next);
             return serverResponse
         } catch (e) {
-            // tslint:disable-next-line:no-console
             console.log(e)
             next();
         }

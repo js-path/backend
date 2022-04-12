@@ -11,11 +11,11 @@ class UserService {
     async registration(req:Request, res:Response, next:NextFunction){
         try {
             const {name, lastName, email, phoneNumber, username, password} = req.body
-            const ifUsername = await User.findOne({username})  // ստուգում ենք username ֊ը կա՞ գրանցվածների բազայում թե ոչ
-            if(ifUsername){
+            const ifUsername = await User.findOne({username})
+                        if(ifUsername){
                 return res.status(400).json({message:"Username ֊ը զբաղված է։"})
             }
-            const ifEmail = await User.findOne({email}) // ստուգում ենք տվյալ email ֊ով գրանցվել են թե ոչ
+            const ifEmail = await User.findOne({email})
             if(ifEmail){
                 return res.status(400).json({message:`${email} ֊ը արդեն գրանցված է։`})
             }
@@ -27,7 +27,6 @@ class UserService {
             mailService.sendMail(email, activationLink)
             return res.status(200).json({message:`Գնացեք ${email} և հաստատեք գրանցումը`})
         } catch (error) {
-            // tslint:disable-next-line:no-console
             console.log(error)
             next()
         }
@@ -45,11 +44,9 @@ class UserService {
                 return res.status(400).json({message:'Գաղtնաբառը սխալ է։'})
             }
             const token = await tokenService.generate(user._id, user.username)
-            // tslint:disable-next-line:no-console
             console.log(token)
             res.json({token})
         } catch(e){
-            // tslint:disable-next-line:no-console
             console.log(e)
             res.status(400).json({message: 'Լօգինի ընթացքում սխալ է տեղի ունեցել'})
             next()

@@ -20,10 +20,8 @@ class MailService{
 
         transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            // tslint:disable-next-line:no-console
             console.log(error);
         } else {
-            // tslint:disable-next-line:no-console
             console.log('Email sent: ' + info.response);
         }
         });

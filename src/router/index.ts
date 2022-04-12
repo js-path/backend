@@ -2,12 +2,9 @@ import * as express from "express";
 import {userController} from "../controllers/user-controller"
 import {check} from "express-validator"
 import authMiddleware from '../middlewares/auth-middleware'
+import {badgeController} from "../controllers/badge-controller";
 
 const router = express.Router()
-
-
-
-// router.get("/")
 
 router.post("/registration",[
     check("name", "Անունը չպետք է լինի դատարկ։").isLength({min:1, max:15}),
@@ -23,10 +20,12 @@ router.post("/login", [
     check("password", "Գրեք գաղտնաբառը։").isLength({min:1, max:30})
 ], userController.login)
 
-// router.get("/logout")
 router.get("/activate/:link", userController.activate)
-router.get("/users", authMiddleware, userController.getUsers) // տեստի համար
+router.get("/users", authMiddleware, userController.getUsers)
 
+
+router.post('/badge', badgeController.posting)
+router.delete('/badge', badgeController.deleting)
 
 export {router}
 
