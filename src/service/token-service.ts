@@ -11,7 +11,6 @@ class TokenService {
 
     validate(token:string) {
         try {
-            // tslint:disable-next-line:no-console
             console.log(token)
 
             const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
