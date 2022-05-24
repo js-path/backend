@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken"
 
 
 class TokenService {
-    async generate(id:number, username:string){
+    async generate(id: any, username:string){
         const payload = {
             id, username
         }
