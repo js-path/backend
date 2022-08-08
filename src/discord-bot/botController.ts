@@ -1,4 +1,5 @@
 import { messageDataModel } from "../models/message-data-model";
+
 class BotController {
   normalizeObject(arg: any) { return JSON.parse(JSON.stringify(arg)) };
 
@@ -12,20 +13,20 @@ class BotController {
   };
 
 
-   async storeMsgsInDb(cleanMsgs: any) {
-     cleanMsgs.forEach((cleanMsg: any) => {
-       const newMessageData = new messageDataModel({
-         content: cleanMsg.content,
-         authorId: cleanMsg.authorId,
-         id: cleanMsg.id,
-         messageSentAt: cleanMsg.createdTimestamp,
-       });
+  async storeMsgsInDb(cleanMsgs: any) {
+    cleanMsgs.forEach((cleanMsg: any) => {
+      const newMessageData = new messageDataModel({
+        content: cleanMsg.content,
+        authorId: cleanMsg.authorId,
+        id: cleanMsg.id,
+        messageSentAt: cleanMsg.createdTimestamp,
+      });
 
-        newMessageData.save()
-          .then()
-          .catch((err: any) => { console.log(err) })
-     });
-   };
+      newMessageData.save()
+        .then()
+        .catch((err: any) => { console.log(err) })
+    });
+  };
 
 }
 
