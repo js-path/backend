@@ -1,19 +1,11 @@
 import discord, {
   Intents,
   Client,
-  MessageManager,
-  ChannelManager,
-  AnyChannel,
-  CategoryChannel,
-  KeyedEnum,
-} from "discord.js";
+  MessageManager
+}
+  from "discord.js";
 import fs from "fs";
 import { botController } from "./botController";
-import { cronJobForMessages } from "./botCronJob";
-import { CronJob } from "cron";
-import { json } from "stream/consumers";
-
-
 
 
 const discordExec = async () => {
@@ -24,13 +16,13 @@ const discordExec = async () => {
     console.log(`\n[+]Logged in as ${client.user.tag}!`);
     const channels = client.channels.cache.filter((c: any) => c.type === "GUILD_TEXT").toJSON()
     for (const oneChannel of channels) {
-           const allMessages = (oneChannel as { messages: MessageManager }).messages.fetch({ limit: 1 })
+      const allMessages = (oneChannel as { messages: MessageManager }).messages.fetch({ limit: 1 })
 
-           allMessages.then((result): void => {
-             const cleanMsgs = botController.normalizeObject(result);
-             botController.storeMsgsInDb(cleanMsgs)
-           });
-         };
+      allMessages.then((result): void => {
+        const cleanMsgs = botController.normalizeObject(result);
+        botController.storeMsgsInDb(cleanMsgs)
+      });
+    };
   });
 
 
@@ -38,9 +30,5 @@ const discordExec = async () => {
   client.login(process.env.DISCORD_BOT_TOKEN);
 
 };
-
-//  await client.on("messageCreate", async (msg) => {
-//     botController.goodMoRandomReact(msg);
-//   });
 
 export { discordExec };

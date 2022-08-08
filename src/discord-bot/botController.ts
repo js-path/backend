@@ -21,10 +21,9 @@ class BotController {
          messageSentAt: cleanMsg.createdTimestamp,
        });
 
-       // newMessageData.save()
-        //  .then()
-        console.log(newMessageData)
-        //  .catch((err: any) => { console.log(err) })
+        newMessageData.save()
+          .then()
+          .catch((err: any) => { console.log(err) })
      });
    };
 
