@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken"
 
 
 class TokenService {
-    async generate(id:number, username:string){
+    async generate(id: string, username:string){
         const payload = {
             id, username
         }
@@ -20,7 +20,6 @@ class TokenService {
             return null;
         }
     }
-
 
 }
 
