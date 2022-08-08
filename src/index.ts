@@ -8,10 +8,8 @@ import fs from "fs";
 import path from "path";
 
 import { router } from "./router/index";
-import { Request, Response } from "express";
-import { channel } from "diagnostics_channel";
-import { memberModel } from "./models/member-model";
-import { discordExec } from "./discord-bot/discord.bot"
+import { cronJobForMessages } from "./discord-bot/botCronJob"
+
 dotenv.config();
 
 const app = express();
@@ -38,11 +36,11 @@ app.use("/", router);
 const start = async () => {
   try {
     app.listen(process.env.PORT, () => {
-        console.log(`[+] server started on port ${process.env.PORT}`);
+      console.log(`[+] server started on port ${process.env.PORT}`);
     });
     mongoose.connect(process.env.MONGO_DB_CONNNECT_STRING, () => {
       console.log("\n[+] mongodb connected");
-       discordExec()
+      cronJobForMessages.start();
     });
 
   } catch (e) {

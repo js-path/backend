@@ -1,16 +1,15 @@
-import { LargeNumberLike } from "crypto";
 import {Schema, model} from "mongoose";
 
 interface MessageDataModel{
     content:string;
-    author:string;
+    authorId:string;
     id:string;
     messageSentAt:number;
 }
 
 const MessageDataModel = new Schema<MessageDataModel>({
     content:{type:String},
-    author:{type:String},
+    authorId:{type:String},
     id:{type:String, unique:true},
     messageSentAt:{type:Number}
 })
