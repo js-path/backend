@@ -15,7 +15,7 @@ class MailService{
             from: process.env.SMTP_USER,
             to,
             subject: 'step learnin hub accouunt activation',
-            text: 'http://localhost:5000/api/activate/'+activationLink
+            text: `http://localhost:${process.env.PORT}/api/activate/`+activationLink
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
